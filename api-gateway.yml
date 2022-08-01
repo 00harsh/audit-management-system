@@ -1,0 +1,42 @@
+server:
+  port: 9191
+
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: audit-authorization
+        uri:
+          http://localhost:8100
+        predicates:
+        - Path=/audit-auth/**
+        filters:
+        - StripPrefix=1
+        
+      - id: audit-checklist
+        uri:
+          http://localhost:8200
+        predicates:
+        - Path=/audit-checklist/**
+        filters:
+        - StripPrefix=1
+        
+      - id: audit-benchmark
+        uri:
+          http://localhost:8250
+        predicates:
+        - Path=/audit-benchmark/**
+        filters:
+        - StripPrefix=1
+        
+      - id: audit-severity
+        uri:
+          http://localhost:8300
+        predicates:
+        - Path=/audit-severity/**
+        filters:
+        - StripPrefix=1
+      
+
+
+
